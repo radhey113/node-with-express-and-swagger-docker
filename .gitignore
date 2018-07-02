@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+
+# Visual Studio Code created by default file's
+.vscode
+
+# Remove unnessary file's
+.idea
+.eslintrc

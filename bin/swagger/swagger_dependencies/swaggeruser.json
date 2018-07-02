@@ -1,0 +1,38 @@
+{
+  "apiVersion": "0.0.1",
+  "swaggerVersion": "1.2.5",
+  "basePath": "",
+  "apis": [
+    {
+      "path": "/user",
+      "operations": [
+        {
+          "httpMethod": "GET",
+          "summary": "get a user by user id",
+          "nickname": "User",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseMessages": [
+            {
+              "code": 500,
+              "message": "Internal server error"
+            },
+            {
+              "code": 400,
+              "message": "Bad request"
+            },
+            {
+              "code": 404,
+              "message": "Not found"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

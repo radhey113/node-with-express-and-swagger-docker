@@ -1,0 +1,42 @@
+{
+  "name": "withexpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp start",
+    "gulp-build": "NODE_ENV='production' gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "express-validation-swagger": "^0.1.5",
+    "fs": "0.0.1-security",
+    "gulp-live-server": "0.0.31",
+    "jsonwebtoken": "^8.1.1",
+    "log4js": "^2.4.1",
+    "moment": "^2.21.0",
+    "moment-timezone": "^0.5.14",
+    "mongoose": "^5.0.5",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "path": "^0.12.7",
+    "randomstring": "^1.1.5",
+    "request": "^2.85.0",
+    "sendinblue-api": "^1.0.8",
+    "swagger-express": "^1.0.5",
+    "swagger-node-express": "^2.1.3"
+  },
+  "devDependencies": {
+    "child_process": "^1.0.2",
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
+    "gulplog": "^1.0.0"
+  }
+}

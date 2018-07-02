@@ -1,0 +1,11 @@
+{
+  "apiVersion": "0.1.5",
+  "swaggerVersion": "1.2.5",
+  "basePath": "",
+  "apis": [
+    {
+      "path": "/api-docs.json/user",
+      "description": "User API"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+apps:
+  - script : ./server.js
+    watch  : true
+    env    :
+      NODE_ENV: production
+      PORT   :  8081
+      DB_HOST: 3306
+    env_production:
+      NODE_ENV: production
+      PORT   :  8081
+      DB_HOST: 3306

@@ -1,0 +1,44 @@
+/**
+ * Created by lakshmi on 15/02/18.
+ */
+
+"use strict";
+
+let serverConfig = {
+    mongodb: {
+        host        : "127.0.0.1",
+        port        : 27017,
+        name        : "mongodb",
+        connector   : "mongodb",
+        url         : process.env.dbUrl || "mongodb://127.0.0.1:27017/demo_dev",
+        database    : "demo_dev",
+        user        : "",
+        password    : "",
+    },
+    host    : "0.0.0.0",
+    type    : "http://",
+    port    : process.env.serverPort || '4000'
+};
+
+
+/** Maintain evn variable **/ 
+console.log(`env: ${process.env.NODE_ENV}`);
+if(process.env.NODE_ENV === "development"){
+    
+    serverConfig.mongodb.user           =   "";
+    serverConfig.mongodb.password       =   "";
+}
+else if( process.env.NODE_ENV === "production"){
+
+    serverConfig.mongodb.url            =   process.env.dbUrl || "mongodb://127.0.0.1:27017/demo";
+    serverConfig.mongodb.database       =   "demo";
+    serverConfig.mongodb.user           =   "";
+    serverConfig.mongodb.password       =   "";
+    serverConfig.port                   =   process.env.serverPort || "4001";
+}
+
+/** exporting server configuration **/
+module.exports = serverConfig;
+
+
+

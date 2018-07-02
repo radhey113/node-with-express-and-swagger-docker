@@ -12,7 +12,7 @@ For API documentation I have used `Swagger`.
 `NodeJS v8+`
 + *`Ref:`* http://nodejs.org
 ## Run
-+ Go to project folder and run npm install
++ Go to project folder
 + Run Command    `npm install`
 + Then Run Command `node server.js`
 + Open `http://localhost:4000` to check that your server is running or not.

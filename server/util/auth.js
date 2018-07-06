@@ -1,22 +1,29 @@
 /**
- * Created by Radhey on 15/02/18.
+ * Created by Radhey Shyam on 15/02/18.
  */
 
 "use strict";
 
+
+/************** Modules **************/
 let MODEL           =   require("../models");
 let COMMON_FUN      =   require("../util/commonFunction");
 let CONSTANTS       =   require("../util/constants");
 const JWT           =   require("jsonwebtoken");
 
 let velidateUser = {};
-/** validate user */
+
+/********************************
+ ********* validate user ********
+ ********************************/
 velidateUser.userValidation = ( REQUEST, RESPONSE, NEXT )=>{
     let status = JWT.decode(REQUEST.headers.authorization, CONSTANTS.SERVER.JWT_SECRET_KEY);
     (status && status.role === CONSTANTS.DATABASE.USER_ROLES.USER) ? NEXT() : RESPONSE.jsonp(CONSTANTS.STATUS_MSG.ERROR.UNAUTHORIZED);
 };
 
-/** admin authentication */
+/********************************
+ ****** admin authentication ****
+ ********************************/
 velidateUser.adminValidation = ( REQUEST, RESPONSE, NEXT )=>{
     let status = REQUEST.headers.authorization ?
         JWT.decode(REQUEST.headers.authorization, CONSTANTS.SERVER.JWT_SECRET_KEY):
@@ -25,7 +32,9 @@ velidateUser.adminValidation = ( REQUEST, RESPONSE, NEXT )=>{
     (status && status.role === CONSTANTS.DATABASE.USER_ROLES.ADMIN) ? NEXT() : RESPONSE.jsonp(CONSTANTS.STATUS_MSG.ERROR.UNAUTHORIZED);
 };
 
-/** admin check model */
+/********************************
+****** admin check model ********
+*********************************/
 velidateUser.adminCheck = ( REQUEST, RESPONSE, NEXT )=>{
     let dataObj = REQUEST.query.username;
     if(REQUEST.query.username){
@@ -58,7 +67,9 @@ velidateUser.adminCheck = ( REQUEST, RESPONSE, NEXT )=>{
     });
 };
 
-/** user check model */
+/********************************
+ ****** User check model ********
+ *********************************/
 velidateUser.userCheck = ( REQUEST, RESPONSE, NEXT )=>{
     let dataObj = REQUEST.query.username;
     if(REQUEST.query.username){

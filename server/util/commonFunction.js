@@ -2,18 +2,11 @@
  * Created by Radhey Shyam on 11/14/17.
  */
 
-// const async          = require('async');
-const Boom           = require('boom');
 let CONSTANTS        = require('./constants');
-const fs             = require('fs');
-let CONFIG           = require('../config');
 const MONGOOSE       = require('mongoose');
 const BCRYPT         = require("bcryptjs");
 const JWT            = require("jsonwebtoken");
 const randomstring   = require("randomstring");
-const cherio         = require("cheerio");
-const SEND_IN_BLUE   = require('sendinblue-api');
-const MOMMENT        = require("moment-timezone");
 
 
 /**
@@ -43,7 +36,6 @@ let decryptPswrd = (payloadPassword, userPassword, cb) => {
 
 /** To capitalize a stirng ***/
 String.prototype.capitalize = function() {
-
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
@@ -200,7 +192,9 @@ let verifyEmailFormat = (email)=> {
 
 
 
-/** check all fields are available */
+/**************************************
+ *  check all fields are filed with ***
+ *** values in request body or not ****/
 let objProperties = (obj, callback)=>{
     for (i in obj) {
         if (!obj[i]) {
@@ -288,22 +282,34 @@ let replaceValueFromString = (stringValue, valueToReplace, value) => {
 
 
 
+/***************************************
+ **** Logger for error and success *****
+ ***************************************/
+let messageLogs = (error, success) => {
+    if(error)
+        console.log(`\x1b[31m`+error);
+    else
+        console.log(`\x1b[32m`+success);
+};
+
+
 /*exporting all object from here*/
 module.exports = {
-  sendError: sendError,
-  sendSuccess: sendSuccess,
-  encryptPswrd: encryptPswrd,
-  decryptPswrd: decryptPswrd,
-  checkDuplicateValuesInArray: checkDuplicateValuesInArray,
-  verifyEmailFormat: verifyEmailFormat,
-  filterArray: filterArray,
-  sanitizeName: sanitizeName,
-  customErrorResponse: customErrorResponse,
-  convertIdToMongooseId: convertIdToMongooseId,
-  objProperties: objProperties,
-  createToken: createToken,
-  generateRandomString:generateRandomString,
-  objToArray:objToArray,
-  dataFilter: dataFilter,
-  replaceValueFromString: replaceValueFromString
+  sendError                     :   sendError,
+  sendSuccess                   :   sendSuccess,
+  encryptPswrd                  :   encryptPswrd,
+  decryptPswrd                  :   decryptPswrd,
+  checkDuplicateValuesInArray   :   checkDuplicateValuesInArray,
+  verifyEmailFormat             :   verifyEmailFormat,
+  filterArray                   :   filterArray,
+  sanitizeName                  :   sanitizeName,
+  customErrorResponse           :   customErrorResponse,
+  convertIdToMongooseId         :   convertIdToMongooseId,
+  objProperties                 :   objProperties,
+  createToken                   :   createToken,
+  generateRandomString          :   generateRandomString,
+  objToArray                    :   objToArray,
+  dataFilter                    :   dataFilter,
+  replaceValueFromString        :   replaceValueFromString,
+  messageLogs                   :   messageLogs
 };

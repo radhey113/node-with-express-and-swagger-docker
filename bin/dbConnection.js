@@ -1,9 +1,15 @@
 
-/** mongodb connection **/
 'use strict';
 
-let MONGOOSE        =    require('mongoose');
+/*******************************
+ *** MONGOOSE for connection ***
+ *******************************/
+let MONGOOSE   =  require('mongoose');
 
+
+/*******************************
+ ***** Mongodb connection  *****
+ *******************************/
 module.exports = (URL) => {
     return new Promise((resolve, reject) => {
         MONGOOSE.connect(URL, (err, response)=>{
@@ -13,5 +19,5 @@ module.exports = (URL) => {
                 resolve(null);
         });    
     })
-}
+};
 

@@ -1,6 +1,10 @@
 
 'use strict';
 
-module.exports = function(app, passport){
+/********************************
+ **** Managing all the routes ***
+ ********* independently ********
+ ********************************/
+module.exports = function(app){
     require("./v1")(app)
 };

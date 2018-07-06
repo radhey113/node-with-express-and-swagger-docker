@@ -1,6 +1,12 @@
 
 'use strict';
 
-module.exports = function(app, passport){
-    require("./userRoutes")(app, passport)
+
+/********************************
+ * Calling routes and passing ***
+ * @param app (express instance)*
+ ******** to create API *********
+ ********************************/
+module.exports = function(app){
+    require("./userRoutes")(app)
 };

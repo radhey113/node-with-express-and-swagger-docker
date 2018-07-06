@@ -1,5 +1,8 @@
 "use strict";
+
+/***********************************
+ ****** Configuration Manager ******
+ ***********************************/
 module.exports = {
-    dbConfig        : require("./dbConfig"),
-    swaggerConfig   : require("./swaggerCongif")
+    dbConfig        : require("./dbConfig")
 };

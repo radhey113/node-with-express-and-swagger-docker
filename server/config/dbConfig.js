@@ -1,9 +1,12 @@
 /**
- * Created by lakshmi on 15/02/18.
+ * Created by Radhey Shyam on 15/02/18.
  */
 
 "use strict";
 
+/******************************************
+ ****** Default Server configuration ******
+ ******************************************/
 let serverConfig = {
     mongodb: {
         host        : "127.0.0.1",
@@ -21,8 +24,10 @@ let serverConfig = {
 };
 
 
-/** Maintain evn variable **/ 
-console.log(`env: ${process.env.NODE_ENV}`);
+/***********************************
+ ** Maintain server Configuration **
+ **** according to env variable ****
+ ***********************************/
 if(process.env.NODE_ENV === "development"){
     
     serverConfig.mongodb.user           =   "";

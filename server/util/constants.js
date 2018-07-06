@@ -1,7 +1,6 @@
-/**
- * app constants
- */
-
+/****************************************
+ *********** Server Constants ***********
+ ****************************************/
 let SERVER = {
     APP_NAME: 'demo',
     TOKEN_EXPIRATION_IN_MINUTES: 600,
@@ -24,7 +23,11 @@ let SERVER = {
         { DELETED: 2 }
     ]
   };
-  
+
+
+/****************************************
+ ************* DB CONSTANTS *************
+ ****************************************/
   let DATABASE = {
     ZONES:{
         NORTH:'NORTH',
@@ -97,10 +100,12 @@ let SERVER = {
         HOUR_24 : 0,
         PRICE_TYPE: 1
     },
-
-    ORDER_STATUS: ["Pending", "Delivered"]
   };
-  
+
+
+/****************************************
+ ****** Status msg with statusCode ******
+ ****************************************/
   let STATUS_MSG = {
     ERROR: {
 
@@ -505,8 +510,10 @@ let SERVER = {
         }
     }
   };
-  
-  
+
+/***********************************
+ ****** Swagger fix error msg ******
+ ***********************************/
   let swaggerDefaultResponseMessages = [
     {code: 200, message: 'OK'},
     {code: 400, message: 'Bad Request'},
@@ -514,32 +521,7 @@ let SERVER = {
     {code: 404, message: 'Data Not Found'},
     {code: 500, message: 'Internal Server Error'}
   ];
-  
-  let SCREEN_TO_SHOW = {
-    HOMEPAGE : 'HOMEPAGE',
-    TRACKING : 'TRACKING',
-    FEEDBACK : 'FEEDBACK'
-  };
-  
-  let notificationMessages = {
-    verificationCodeMsg: 'Your 4 digit verification code for Seed Project is {{four_digit_verification_code}}',
-    registrationEmail: {
-        emailMessage : "email message comes here",
-        emailSubject: "Email subject"
-    },
-  };
-  
-  let languageSpecificMessages = {
-    verificationCodeMsg : {
-        EN : 'Your 4 digit verification code for Seed Project is {{four_digit_verification_code}}',
-        ES_MX : 'Your 4 digit verification code for Seed Project is {{four_digit_verification_code}}'
-    }
-  };
-  
-  let cryptoCompareAPI_URL = {
-      gettingCoinData : "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=",
-      getCoinsList: "https://www.cryptocompare.com/api/data/coinlist/"
-  };
+
 
   /** BASE64 PATTERN **/
   let TEST_BASE64_PATTERN = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
@@ -550,20 +532,24 @@ let SERVER = {
       KEY: 'days'
   };
 
-
-
-  /**Application constants**/
-  let APP_CONSTANTS = {
-    SERVER: SERVER,
-    DATABASE: DATABASE,
-    SCREEN_TO_SHOW : SCREEN_TO_SHOW,
-    STATUS_MSG: STATUS_MSG,
-    notificationMessages: notificationMessages,
-    languageSpecificMessages: languageSpecificMessages,
-    swaggerDefaultResponseMessages: swaggerDefaultResponseMessages,
-    cryptoCompareAPI_URL: cryptoCompareAPI_URL,
-    TEST_BASE64_PATTERN,
-    SUBTRACT_DATE: SUBTRACT_DATE
+  /** Mail status is here **/
+  let MAIL_STATUS = {
+    OTP_SUB: 'One time password'
   };
-  
+
+
+/***********************************
+ ****** Application Constants ******
+ ***********************************/
+  let APP_CONSTANTS = {
+    SERVER                        : SERVER,
+    DATABASE                      : DATABASE,
+    STATUS_MSG                    : STATUS_MSG,
+    swaggerDefaultResponseMessages: swaggerDefaultResponseMessages,
+    TEST_BASE64_PATTERN           : TEST_BASE64_PATTERN,
+    SUBTRACT_DATE                 : SUBTRACT_DATE,
+    MAIL_STATUS                   : MAIL_STATUS
+  };
+
+  /** Exporting APP CONSTANTS **/
   module.exports = APP_CONSTANTS;

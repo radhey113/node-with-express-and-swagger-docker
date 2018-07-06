@@ -1,10 +1,14 @@
 'use strict';
 
+
+/************** Modules ***************/
 let CONSTANTS           = require('../constants');
 let Models              = require('../../models');
 let UniversalFunction   = require('../commonFunction');
 
-/** Bootstraping for default users... **/
+/******************************************
+ * Bootstraping for default admin user... *
+ ******************************************/
 exports.bootstrapAdmin = function (callback) {
 
     /**Default users**/
@@ -23,7 +27,9 @@ exports.bootstrapAdmin = function (callback) {
         }
     ];
 
-    /** Default user mapping **/
+    /******************************************
+     ******** Default user mapping... *********
+     ******************************************/
     return Promise.all(defaultUser.map( USER => {
 
         UniversalFunction.encryptPswrd(USER.password, (ERR, HASH)=> {
@@ -53,7 +59,9 @@ exports.bootstrapAdmin = function (callback) {
     });
 };
 
-/**Maping app version with app model with respect to user**/
+/****************************************************************
+ **** Maping app version with app model with respect to user*****
+ ***************************************************************/
 exports.bootstrapAppVersion = function () {
      let AppVersion = [
          {
@@ -79,7 +87,9 @@ exports.bootstrapAppVersion = function () {
         }
      ];
 
-    /** Mapping data **/
+    /**********************
+     **** Mapping data*****
+     **********************/
     Promise.all(AppVersion.map(APP_V => {
 
         let CRITERIA = { appType: APP_V.appType };

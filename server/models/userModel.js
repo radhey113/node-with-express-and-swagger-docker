@@ -3,17 +3,18 @@
  */
 
 /**
- * Created by lakshmi on 14/02/18.
+ * Created by Radhey Shyam on 14/02/18.
  */
 
 "use strict";
-
+/************* Modules ***********/
 const MONGOOSE      =   require("mongoose");
 const Schema        =   MONGOOSE.Schema;
 const Constants     =   require("../util/constants");
-/**
- * user schema creation
- */
+
+/**************************************************
+ ************* User Model or collection ***********
+ **************************************************/
 const user_Schema = new Schema({
     username: {
         type: String,

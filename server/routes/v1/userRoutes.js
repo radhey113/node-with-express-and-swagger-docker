@@ -1,5 +1,5 @@
 /**
- * Created by lakshmi on 14/02/18.
+ * Created by Radhey Shyam on 14/02/18.
  */
 
 'use strict';
@@ -7,8 +7,11 @@ let CONTROLLER      =   require("../../controller");
 let auth            =   require("../../util/auth");
 
 
-/** user routes **/
-module.exports = (APP, PASSPORT)=>{
+/****************************************
+ ***** Managing User Routes here ********
+ ***** @param APP (express instance)*****
+ ****************************************/
+module.exports = (APP)=>{
 
     APP.route('/api/register')
         .post(CONTROLLER.userController.registerUser);

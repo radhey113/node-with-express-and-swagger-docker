@@ -23,8 +23,8 @@ module.exports = (APP)=>{
         .get(CONTROLLER.userController.loginUser);
 
     APP.route('/api/forgotPassword')
-        .post(auth.userCheck, CONTROLLER.userController.forgotPassword);
+        .post(CONTROLLER.userController.forgotPassword);
 
     APP.route('/api/changePassword')
-        .post(auth.userCheck, CONTROLLER.userController.changePassword);
+        .post(CONTROLLER.userController.changePassword);
 };

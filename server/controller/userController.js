@@ -89,7 +89,8 @@ userController.loginUser = (REQUEST, RESPONSE)=>{
  ******************* Forget Password **************
  **************************************************/
 userController.forgotPassword = (REQUEST, RESPONSE)=>{
-    let CRITERIA = {email: REQUEST.body.username},
+    
+    let CRITERIA = {email: REQUEST.body.email},
         PROJECTION = {__v : 0, createAt: 0};
     /** find user is exists or not */
     MODEL.userModel.findOne(CRITERIA, PROJECTION, {lean: true}).then((USER) => {
@@ -121,7 +122,7 @@ userController.forgotPassword = (REQUEST, RESPONSE)=>{
 userController.changePassword = async (REQUEST, RESPONSE)=>{
         try {
             /* check user exist or not*/
-            let checkUserExist = await MODEL.userModel.findOne({email: REQUEST.body.username}, {}, {lean: true});
+            let checkUserExist = await MODEL.userModel.findOne({email: REQUEST.body.email}, {}, {lean: true});
 
             if (checkUserExist) {
 
@@ -129,9 +130,9 @@ userController.changePassword = async (REQUEST, RESPONSE)=>{
                 COMMON_FUN.encryptPswrd(REQUEST.body.password, (ERR, HASH) => {
 
                     /********** update password in usermodel ********/
-                    MODEL.userModel.update({email: REQUEST.body.username}, {$set: {password: HASH}}).then((SUCCESS) => {
+                    MODEL.userModel.update({email: REQUEST.body.email}, {$set: {password: HASH}}).then((SUCCESS) => {
 
-                        return RESPONSE.jsonp(COMMON_FUN.sendSuccess(CONSTANTS.STATUS_MSG.SUCCESS.CREATED, SUCCESS));
+                        return RESPONSE.jsonp(COMMON_FUN.sendSuccess(CONSTANTS.STATUS_MSG.SUCCESS.UPDATED));
                     }).catch((ERR) => {
                         return RESPONSE.jsonp(COMMON_FUN.sendError(ERR));
                     });

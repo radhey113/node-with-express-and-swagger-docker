@@ -11,8 +11,8 @@
  * path: /api/login
  * operations:
  *   -  httpMethod: GET
- *      summary: Login with username and password
- *      notes: Returns a user based on username
+ *      summary: Login with username/email and password
+ *      notes: Login user with username/email and password
  *      responseClass: User
  *      nickname: login
  *      consumes: 
@@ -37,8 +37,8 @@
  * path: /api/register
  * operations:
  *   -  httpMethod: POST
- *      summary: signup with username and password
- *      notes: Returns a user based on username
+ *      summary: Signup with username, email and password
+ *      notes: Signup with username, email and password
  *      responseClass: User
  *      nickname: register_user
  *      consumes:
@@ -62,8 +62,8 @@
  * path: /api/forgotPassword
  * operations:
  *   -  httpMethod: POST
- *      summary: signup with username and password
- *      notes: Returns a user based on username
+ *      summary: Forget password api for otp
+ *      notes: Returns an OTP for forget password
  *      responseClass: FORGOT
  *      nickname: register_user
  *      consumes:
@@ -72,7 +72,7 @@
  *        - application/json
  *      parameters:
  *        - in: body
- *          description: User registration here
+ *          description: Returns an OTP for forget password
  *          name: body
  *          paramType: body
  *          dataType: FORGOT
@@ -88,8 +88,8 @@
  * path: /api/changePassword
  * operations:
  *   -  httpMethod: POST
- *      summary: changePassword for users
- *      notes: change password api is used for changing password using otp
+ *      summary: changePassword for users with OTP
+ *      notes: Change password api is used for changing password using OTP
  *      responseClass: ChangePassword
  *      nickname: change_password
  *      consumes:
@@ -115,8 +115,8 @@
  * path: /api/fileUpload
  * operations:
  *   -  httpMethod: POST
- *      summary: changePassword for users
- *      notes: change password api is used for changing password using otp
+ *      summary: file upload api
+ *      notes: file upload api for user
  *      nickname: change_password
  *      parameters:
  *        - in: formData
@@ -149,7 +149,7 @@
  *   ChangePassword:
  *     id: ChangePassword
  *     properties:
- *       username:
+ *       email:
  *         type: String
  *       otp:
  *         type: String

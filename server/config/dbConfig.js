@@ -13,7 +13,7 @@ let serverConfig = {
         port        : 27017,
         name        : "mongodb",
         connector   : "mongodb",
-        url         : process.env.dbUrl || "mongodb://127.0.0.1:27017/demo_dev",
+        url         : process.env.dbUrl || "mongodb://127.0.0.1/demo_dev",
         database    : "demo_dev",
         user        : "",
         password    : "",

@@ -7,12 +7,9 @@ For API documentation I have used `Swagger`.
 ## Requirment
  `Mongodb 3.6`:
 + **Install MonngDB 3.6**
-
 + *` Ref: `* https://docs.mongodb.com/manual/installation/
 
-
 `NodeJS v8+`
-
 + *`Ref:`* http://nodejs.org
 
 ## Run Locally with Node
@@ -25,15 +22,15 @@ For API documentation I have used `Swagger`.
 
 ## Run Project with Dockerfile
 + Install Docker
- + `https://docs.docker.com/install/`
+  + `https://docs.docker.com/install/`
 + Go to terminal, Run command
- + `cd <Project directory path>`
+  + `cd <Project directory path>`
 + Run command to create node project build
- + `docker build -t node:8 ./`
+  + `docker build -t node:8 ./`
 + To Run node server (Local 4000 port mapping node server 4000 port from container)
- + `docker run -p 4000:4000 node:8`
+  + `docker run -p 4000:4000 node:8`
 + To Run node server in deamon mode use command `<Parameter -d>`
- + `docker run -p 4000:4000 -d node:8`
+  + `docker run -p 4000:4000 -d node:8`
 + Open `http://localhost:4000` to check that your server is running or not.
 + To check the documentation Kindly follow the: `http://localhost:4000/swagger`
 
@@ -42,15 +39,15 @@ For API documentation I have used `Swagger`.
 - Create and .env file in your project directory
 - Write enviornment variable like: `NODE_ENV=development`
 - Use `--env-file ./env` parameter with `docker run` command
-- Example: `docker run --env-file ./env -p 4000:4000 node:8`
+  - Example: `docker run --env-file ./env -p 4000:4000 node:8`
 
 
 ## Environment Vairable
 + To set the `environment`variable for your project, you can use `./environment/development.yml` or for development or `./environment/production.yml` for production environment.
 + You can also set the environment using shell command:
-    `- export env=development`
+  + `export env=development`
 + To check that `environment` variable is set or not:
-   `- echo ${env}`
+  + `echo ${env}`
 
 *I hope it will help you to create your new nodejs project with express using swagger api documentation.*
 ## Thank you

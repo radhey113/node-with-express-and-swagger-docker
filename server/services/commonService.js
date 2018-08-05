@@ -7,6 +7,7 @@ const commonFun     =     require("../util/commonFunction");
 let FS              =     require("fs");
 let CONFIG          =     require('../config');
 var multer          =     require('multer');
+let GM              = require('gm').subClass({imageMagick: true});
 
 /**
  * Storage for file in local machine
@@ -57,10 +58,36 @@ commonService.fileUpload = (REQUEST, RESPONSE) => {
            // No error occured.
            console.log(REQUEST.file);
             let path = REQUEST.file.path;
+            createImage(path).then(result => {
+                console.log(result);
+            });
+
+
             return resolve(path);
       });     
     })
 }
+
+/** Create image **/ 
+let createImage = (originPath) => {
+    
+    return new Promise((resolve, reject) => {
+
+        var readStream = FS.createReadStream(originPath);
+            GM(readStream)
+                .size({ bufferStream: true }, function (err, size) {
+                    if (size) {
+                        this.thumb(size.width, size.height, originPath, 10,
+                        /* .autoOrient()
+                        .write(thumbnailPath1,*/ function (err, data) {
+                                err ? reject(err) : resolve(data);
+                            })
+                    }
+                });
+    });
+}
+
+
 
 /**
  * common model service exporting

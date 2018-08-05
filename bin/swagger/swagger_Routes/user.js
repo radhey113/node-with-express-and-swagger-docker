@@ -115,7 +115,7 @@
  * path: /api/fileUpload
  * operations:
  *   -  httpMethod: POST
- *      summary: file upload api
+ *      summary: Any Single file upload api
  *      notes: file upload api for user
  *      nickname: change_password
  *      parameters:

@@ -29,7 +29,6 @@ const app         = EXPRESS();
     app.use(BODY_PARSER.json({limit: '50mb'}));
     app.use(BODY_PARSER.urlencoded({ limit: '50mb', extended: true }));
 
-
     /** middleware for api's logging with deployment mode */
     let apiLooger = (req, res, next)=>{
             ALLFILES.COMMON_FUN.messageLogs(null, `api hitted ${req.url} ${ process.env.NODE_ENV}`);

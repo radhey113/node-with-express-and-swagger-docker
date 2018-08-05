@@ -6,7 +6,6 @@
 let CONTROLLER      =   require("../../controller");
 let auth            =   require("../../util/auth");
 
-
 /****************************************
  ***** Managing User Routes here ********
  ***** @param APP (express instance)*****

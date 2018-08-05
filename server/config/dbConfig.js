@@ -18,7 +18,7 @@ let serverConfig = {
         user        : "",
         password    : "",
     },
-    host    : "0.0.0.0",
+    host    : "localhost",
     type    : "http://",
     port    : process.env.serverPort || '4000'
 };

@@ -4,8 +4,11 @@
 
 "use strict";
 const commonFun     =     require("../util/commonFunction");
-let fs              =     require("fs");
+let FS              =     require("fs");
 let CONFIG          =     require('../config');
+var multer          =     require('multer');
+var upload          =     multer({ dest: './client/uploads/' }).single('file');
+
 
 let commonService = {};
 /**
@@ -24,26 +27,21 @@ commonService.find = (model, criteria, projection, callback)=>{
 };
 
 
-/**
- *
- * @param FILE
- * @param CB
- */
-commonService.fileUpload = (FILE, CB)=>{
-    // FILE = FILE.split(",");
-    // FILE = FILE[1];
-    let imageSavePath = "client/uploads/trailerImages/trailer_"+Date.now()+".png",
-    imagePath = "/uploads/abc_"+Date.now()+".png";
-    /* upload file locally */
-    fs.writeFile(imageSavePath, FILE, "base64" , function(err) {
-        if (err)
-            return CB(err);
-        else {
-           imagePath = CONFIG.dbConfig_Prods.type + CONFIG.dbConfig_Prods.host + ":" + CONFIG.dbConfig_Prods.port + imagePath;
-           CB(null, imagePath);
-        }
-    });
-};
+/** Upload file **/ 
+commonService.fileUpload = (REQUEST, RESPONSE) => {
+    return new Promise((resolve, reject) => {
+        
+        upload(REQUEST, RESPONSE, function (err) {
+            if (err) {
+              // An error occurred when uploading
+                return reject(`Error: ${err}`);
+            }  
+           // No error occured.
+            let path = REQUEST.file.path;
+            return resolve(path);
+      });     
+    })
+}
 
 /**
  * common model service exporting

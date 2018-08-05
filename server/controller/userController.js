@@ -10,16 +10,32 @@
 let userController      = {};
 let MODEL               = require("../models");
 let COMMON_FUN          = require("../util/commonFunction");
+let SERVICE             = require("../services/commonService");
 let CONSTANTS           = require("../util/constants");
-
+let FS                  = require('fs');
 
 /**************************************************
  ****** Upload image or media (under process) *****
  **************************************************/
 userController.upload = (REQUEST, RESPONSE)=> {
-    console.log(REQUEST.body);
 
-    RESPONSE.jsonp({status: true, message:"upload"});
+    /** Stream
+        // let myReadStream = FS.createReadStream(__dirname + '/index.js');
+        // let myWriteStream = FS.createWriteStream( 'client/uploads/newfile.js' );
+
+        // myReadStream.on('data', (chunks) => {
+        //         console.log('new chunks received--- ', chunks);
+        //         myWriteStream.write(chunks);
+        // })
+     */
+
+    // myReadStream.pipe(myWriteStream);
+
+    SERVICE.fileUpload(REQUEST, RESPONSE).then(result => {
+
+
+        return RESPONSE.jsonp({status: true, message:result});
+    })
 };
 
 
@@ -27,7 +43,6 @@ userController.upload = (REQUEST, RESPONSE)=> {
  ******************* Register User ****************
  **************************************************/
 userController.registerUser = (REQUEST, RESPONSE)=>{
-
     // RESPONSE.jsonp(REQUEST.body);
     let dataToSave = { ...REQUEST.body };
     COMMON_FUN.encryptPswrd(dataToSave.password, (ERR, PASSWORD)=>{

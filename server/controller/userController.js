@@ -33,9 +33,8 @@ userController.upload = (REQUEST, RESPONSE)=> {
 
     SERVICE.fileUpload(REQUEST, RESPONSE).then(result => {
 
-
         return RESPONSE.jsonp({status: true, message:result});
-    })
+    });
 };
 
 

@@ -7,7 +7,25 @@ const commonFun     =     require("../util/commonFunction");
 let FS              =     require("fs");
 let CONFIG          =     require('../config');
 var multer          =     require('multer');
-var upload          =     multer({ dest: './client/uploads/' }).single('file');
+
+/**
+ * Storage for file in local machine
+ */ 
+let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './client/uploads/')
+    },
+    filename: function (req, file, cb) {
+        let fileName = file.originalname.split('.');
+        let fileExtension = fileName[fileName.length-1];
+        cb(null, Date.now() + '.' + fileExtension);
+    }
+});
+
+/** Upload single file **/ 
+const upload = multer({
+    storage: storage
+}).single('file');  
 
 
 let commonService = {};
@@ -35,8 +53,9 @@ commonService.fileUpload = (REQUEST, RESPONSE) => {
             if (err) {
               // An error occurred when uploading
                 return reject(`Error: ${err}`);
-            }  
+            } 
            // No error occured.
+           console.log(REQUEST.file);
             let path = REQUEST.file.path;
             return resolve(path);
       });     

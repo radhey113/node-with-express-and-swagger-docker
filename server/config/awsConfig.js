@@ -13,13 +13,12 @@ var s3BucketCredentials = {
 
 
 s3BucketCredentials = {
-    "bucket": "coworkbucket",
-    "accessKeyId": "AKIAJFRFAFN3WVDAUK7Q",
-    "secretAccessKey": "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",
-    "s3URL": "https://s3-us-west-2.amazonaws.com/coworkbucket/",
+    "bucket": "<bucket>",
+    "accessKeyId": "<access key>",
+    "secretAccessKey": "<secret key>",
+    "s3URL": "<s3bucket url>",
     "folder": {
-        "profilePicture": "profilePicture",
-        "thumb": "thumb"
+        "folder": "<folder>"
     }
 };
 

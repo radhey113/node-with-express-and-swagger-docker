@@ -7,7 +7,19 @@ const commonFun     =     require("../util/commonFunction");
 let FS              =     require("fs");
 let CONFIG          =     require('../config');
 var multer          =     require('multer');
-let GM              = require('gm').subClass({imageMagick: true});
+let Path            =     require('path');
+var AWS             =     require("aws-sdk");
+var mime            =     require('mime-types')
+let GM              =     require('gm').subClass({imageMagick: true});
+var FsExtra         =     require('fs-extra');
+
+
+AWS.config.update({
+    accessKeyId: CONFIG.awsConfig.accessKeyId,
+    secretAccessKey: CONFIG.awsConfig.secretAccessKey,
+    //  region:' '
+});
+var s3 = new AWS.S3();
 
 /**
  * Storage for file in local machine
@@ -24,10 +36,7 @@ let storage = multer.diskStorage({
 });
 
 /** Upload single file **/ 
-const upload = multer({
-    storage: storage
-}).single('file');  
-
+const upload = multer({ storage: storage }).single('file');
 
 let commonService = {};
 /**
@@ -50,41 +59,120 @@ commonService.find = (model, criteria, projection, callback)=>{
 commonService.fileUpload = (REQUEST, RESPONSE) => {
     return new Promise((resolve, reject) => {
         
+        /** Upload pic locally first **/ 
         upload(REQUEST, RESPONSE, function (err) {
             if (err) {
               // An error occurred when uploading
                 return reject(`Error: ${err}`);
             } 
-           // No error occured.
-           console.log(REQUEST.file);
-            let path = REQUEST.file.path;
-            createImage(path).then(result => {
-                console.log(result);
-            });
+
+           /** File data **/
+            let fileData = REQUEST.file,
+                fileName = fileData.originalname.split('.'),
+                fileExtension = fileName[fileName.length-1];
+                
+                fileName = Date.now() + '.' + fileExtension;
+            let path = fileData.path;
+            
+            /** Profile and thumb **/ 
+            fileData.original = "profile_" + fileName;
+            fileData.thumb = "thumbe_" + fileName;
+            
+            /** Thumbnail image **/ 
+            let finalArray = [{
+                path: Path.resolve('.') + '/client/uploads/' + fileData.thumb,
+                finalUrl: CONFIG.awsConfig.s3URL + fileData.thumb,
+            }]
+
+            /** Profile image **/
+            finalArray.push({
+                path: fileData.path,
+                finalUrl: CONFIG.awsConfig.s3URL + fileData.original
+            })
 
 
-            return resolve(path);
+          /** Create thumb image locally **/ 
+          commonService.createThumbImage(path, finalArray[0].path).then(result => {
+
+                let functionsArray = [];
+                finalArray.forEach(function (obj) {
+                    functionsArray.push(commonService.uploadFileS3(obj));
+                });
+
+                /** Upload image in s3 bucket **/
+                return Promise.all(functionsArray).then(result => {                    
+            
+                    commonService.deleteFile(finalArray[0].path);
+                    commonService.deleteFile(finalArray[1].path);
+
+                    return resolve({
+                        imgUrl: CONFIG.awsConfig.s3URL+fileData.original,
+                        thumb: CONFIG.awsConfig.s3URL+fileData.thumb
+                    });
+
+                }).catch(error => {
+                    throw error;
+                })
+                
+          }).catch(error => {
+
+                reject(error);
+          });  
       });     
     })
 }
 
 /** Create image **/ 
-let createImage = (originPath) => {
+commonService.createThumbImage = (originalPath, thumbnailPath) => {
     
     return new Promise((resolve, reject) => {
-
-        var readStream = FS.createReadStream(originPath);
+            
+        var readStream = FS.createReadStream(originalPath);
             GM(readStream)
                 .size({ bufferStream: true }, function (err, size) {
                     if (size) {
-                        this.thumb(size.width, size.height, originPath, 10,
+                        let height = 150;
+                        let width = (size.width * height)/size.height;
+                        this.thumb(width, height, thumbnailPath, 30,
                         /* .autoOrient()
                         .write(thumbnailPath1,*/ function (err, data) {
+                            console.log(data);
                                 err ? reject(err) : resolve(data);
                             })
                     }
                 });
     });
+}
+
+/** Remove file  **/ 
+commonService.deleteFile = (path) => {
+    return FsExtra.remove(path);
+}
+
+
+/** Upload image to s3 bucket **/
+commonService.uploadFileS3 = (fileObj) => {
+    return new Promise((resolve, reject) => {
+
+        var fileName = Path.basename(fileObj.finalUrl);
+        var stats = FS.statSync(fileObj.path);
+
+        var fileSizeInBytes = stats["size"];
+    
+          FS.readFile(fileObj.path, (err, fileData) => {
+              s3.putObject({
+               
+                 Bucket: CONFIG.awsConfig.bucket,
+                 Key: fileName,
+                 Body: fileData,
+                 ContentType: mime.lookup(fileName)
+               
+                }, (err, data) => {
+               
+                err ? reject(err): resolve(data);
+               });
+          });
+    })
 }
 
 

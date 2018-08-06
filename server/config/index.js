@@ -4,5 +4,6 @@
  ****** Configuration Manager ******
  ***********************************/
 module.exports = {
-    dbConfig        : require("./dbConfig")
+    dbConfig        : require("./dbConfig"),
+    awsConfig        : require("./awsConfig"),
 };

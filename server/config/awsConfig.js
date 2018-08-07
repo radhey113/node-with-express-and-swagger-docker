@@ -1,6 +1,7 @@
 
 'use strict';
 
+/** AWS credencials config **/ 
 var s3BucketCredentials = {
     "bucket": "<bucketname>",
     "accessKeyId": "<access_key>",
@@ -11,15 +12,5 @@ var s3BucketCredentials = {
     }
 };
 
-
-s3BucketCredentials = {
-    "bucket": "<bucket>",
-    "accessKeyId": "<access key>",
-    "secretAccessKey": "<secret key>",
-    "s3URL": "<s3bucket url>",
-    "folder": {
-        "folder": "<folder>"
-    }
-};
 
 module.exports = s3BucketCredentials;;

@@ -26,4 +26,10 @@ module.exports = (APP)=>{
 
     APP.route('/api/changePassword')
         .post(CONTROLLER.userController.changePassword);
+
+
+    APP.route('/getUser')
+        .get((req, res)=>{
+            res.jsonp('cool')
+        })    
 };

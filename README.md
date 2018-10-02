@@ -23,7 +23,7 @@ For API documentation I have used `Swagger`.
 ## Run Project with Dockerfile
 + Install Docker
   + `https://docs.docker.com/install/`
-  + [Learn Docker](https://medium.com/@radheyg11/docker-with-node-e6cf77cfd21f)
+  + [Run Docker image](https://medium.com/@radheyg11/docker-with-node-e6cf77cfd21f)
 + Go to terminal, Run command
   + `cd <Project directory path>`
 + Run command to create node project build

@@ -58,7 +58,7 @@ userController.registerUser = (REQUEST, RESPONSE)=>{
                       username: RESULT.username,
                       roles: RESULT.roles
                     };
-                    RESPONSE.jsonp(COMMON_FUN.sendSuccess(UserData));
+                    RESPONSE.jsonp(COMMON_FUN.sendSuccess(CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, UserData));
                 }
             });
         }
@@ -90,7 +90,7 @@ userController.loginUser = (REQUEST, RESPONSE)=>{
                     let dataToJwt = {username: USER.username, Date: Date.now, email: USER.email, role: USER.roles},
                         jwtToken  = COMMON_FUN.createToken(dataToJwt); /** creating jwt token */
                     dataToJwt.token = jwtToken;
-                    return RESPONSE.jsonp(COMMON_FUN.sendSuccess(dataToJwt));
+                    return RESPONSE.jsonp(COMMON_FUN.sendSuccess(CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, dataToJwt));
                 }
             })
         :RESPONSE.jsonp(COMMON_FUN.sendError(CONSTANTS.STATUS_MSG.ERROR.INVALID_EMAIL));
@@ -104,7 +104,6 @@ userController.loginUser = (REQUEST, RESPONSE)=>{
  ******************* Forget Password **************
  **************************************************/
 userController.forgotPassword = (REQUEST, RESPONSE)=>{
-    
     let CRITERIA = {email: REQUEST.body.email},
         PROJECTION = {__v : 0, createAt: 0};
     /** find user is exists or not */
@@ -126,7 +125,7 @@ userController.forgotPassword = (REQUEST, RESPONSE)=>{
         };
         RESPONSE.jsonp(COMMON_FUN.sendSuccess(CONSTANTS.STATUS_MSG.SUCCESS.CREATED, saveToOTP));
 
-    }).catch((err) => {
+    }).catch((ERR) => {
         return RESPONSE.jsonp(COMMON_FUN.sendError(ERR))
     });
 };
